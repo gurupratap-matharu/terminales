@@ -37,8 +37,8 @@
     {% if request.in_preview_panel %}<base target="_blank" />{% endif %}
     {# Global stylesheets #}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/poncho.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/poncho.css' %}" rel="stylesheet" />
     {% block extra_css %}
       {# Override this in templates to add extra stylesheets #}
     {% endblock extra_css %}
@@ -61,8 +61,8 @@
       {% include "includes/footer.html" %}
     {% endblock footer %}
     {# Global javascript #}
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
     {% block extra_js %}
       {# Override this in templates to add extra javascript #}
     {% endblock extra_js %}
