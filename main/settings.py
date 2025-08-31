@@ -150,7 +150,7 @@ STORAGES = {
     # (e.g. after a Wagtail upgrade).
     # See https://docs.djangoproject.com/en/5.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",  # Veer changed from Manifest to Static
     },
 }
 
@@ -191,6 +191,70 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+DEFAULT_PER_PAGE = 8
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "changeme")
+
+INDEXNOW_KEY = os.getenv("INDEXNOW_KEY")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s:%(lineno)d %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "warnings.log",
+            "formatter": "verbose",
+        },
+        "mail_admins": {
+            "level": "WARNING",
+            "class": "django.utils.log.AdminEmailHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+        "formatter": "verbose",
+    },
+    "loggers": {
+        "wagtail": {
+            "level": os.getenv("WAGTAIL_LOG_LEVEL", default="INFO"),
+            "handlers": ["console", "file"],
+            "propagate": False,
+        },
+        "django": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["console", "file"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["file", "mail_admins"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+    },
+}
 
 if not DEBUG:
     EMAIL_HOST = "smtp.mailgun.org"
