@@ -1,0 +1,109 @@
+APP_LIST ?= main users
+.PHONY: collectstatic run test ci install install-dev migrations staticfiles
+
+help:
+	@echo "Available commands"
+	@echo "ci - lints, migrations, tests, coverage"
+	@echo "runserver - runs the development server"
+	@echo "shellplus - runs the development shell"
+	@echo "lint - check style with black, flake8, sort python with isort, and indent html"
+	@echo "format - enforce a consistent code style across the codebase and sort python files with isort"
+
+tags:
+	ctags --recurse=yes --exclude=.git --exclude=docs --exclude=static --exclude=staticfiles
+
+collectstatic:
+	python manage.py collectstatic --noinput
+
+clean:
+	rm -rf __pycache__ .pytest_cache
+
+check:
+	python manage.py check
+
+check-deploy:
+	python manage.py check --deploy
+
+css:
+	sass static/scss/poncho.scss static/css/poncho.css
+
+shellplus:
+	python manage.py shell_plus --print-sql
+
+shell:
+	python manage.py shell
+
+showmigrations:
+	python manage.py showmigrations
+
+makemigrations:
+	python manage.py makemigrations
+
+makemessages:
+	django-admin makemessages --all
+
+compilemessages:
+	django-admin compilemessages
+
+translations: makemessages compilemessages
+
+migrate:
+	python manage.py migrate
+
+migrations-check:
+	python manage.py makemigrations --check --dry-run
+
+runserver:
+	python manage.py runserver
+
+build: install makemigrations migrate runserver
+
+format:
+	poetry run ruff check --select I --fix .
+	djlint --reformat .
+
+lint:
+	poetry run ruff check --select I --fix .
+	djlint --check .
+
+test: check migrations-check
+	coverage run --source='.' manage.py test
+	coverage html
+
+security:
+	poetry run bandit -r .
+	poetry run safety check
+
+ci: format lint security test
+
+superuser:
+	python manage.py createsuperuser
+
+status:
+	@echo "Nginx"
+	@sudo systemctl status nginx
+
+	@echo "Gunicorn Socket"
+	@sudo systemctl status terminales.socket
+
+	@echo "Gunicorn Service"
+	@sudo systemctl status terminales.service
+
+
+reload:
+	@echo "reloading daemon..."
+	@sudo systemctl daemon-reload
+
+	@echo "🔌 restarting gunicorn socket..."
+	@sudo systemctl restart terminales.socket
+
+	@echo "🦄 restarting gunicorn service..."
+	@sudo systemctl restart terminales.service
+
+	@echo "⚙️ reloading nginx..."
+	@sudo nginx -s reload
+
+	@echo "All done! 💅💫💖"
+
+logs:
+	@sudo journalctl -fu terminales.service

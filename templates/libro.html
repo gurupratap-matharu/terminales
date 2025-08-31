@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="#">Library</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Book</li>
+      </ol>
+    </nav>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Active</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-8">
+        <section>
+          <h1>Título de ejemplo - Chatbot Tina</h1>
+          <p>¡Sumá tu organismo nacional, provincial o municipal a Tina!</p>
+          <p>
+            La Resolución 14/2022 y el Decreto 159/2023 establecen que los organismos y entidades del sector público nacional deberán poner a disposición a Tina en sus sitios web oficiales e invita a las provincias y municipios a sumarse
+          </p>
+          <p>Comunicate con nuestro equipo a equipotina@jefatura.gob.ar y te contamos cómo formar parte.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

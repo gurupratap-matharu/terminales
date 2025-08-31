@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "terminales"
+version = "0.1.0"
+description = "All terminal stations of Argentina"
+authors = ["Gurupratap Matharu <gurupratap.matharu@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+wagtail = "^7.0.2"
+python-dotenv = "^1.1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.7"
+djlint = "^1.36.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.djlint]
+blank_line_before_tag = "load,extends"
+blank_line_after_tag = "load,extends"
+close_void_tags = true
+custom_blocks = "toc,example"
+custom_html = "mjml"
+exclude = ".venv,venv,.tox,.eggs,.git"
+extend_exclude = ".custom"
+format_attribute_template_tags = true
+format_css = true
+format_js = true
+# ignore = "H006"
+ignore_blocks="raw,example"
+indent=2
+max_attribute_length = 120
+max_line_length = 120
+profile = "django"
+use_gitignore = true
+
+[tool.djlint.css]
+indent_size = 5
+
+[tool.djlint.js]
+indent_size = 5
