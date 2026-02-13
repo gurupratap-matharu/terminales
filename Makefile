@@ -1,5 +1,5 @@
-APP_LIST ?= main users
-.PHONY: collectstatic run test ci install install-dev migrations staticfiles
+APP_LIST ?= main users blog home search
+.PHONY: collectstatic run test ci install install-dev migrations staticfiles lint format check
 
 help:
 	@echo "Available commands"
@@ -16,7 +16,14 @@ collectstatic:
 	python manage.py collectstatic --noinput
 
 clean:
-	rm -rf __pycache__ .pytest_cache
+	@find . -not -path '*/.venv/*' | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
+
+	@# Remove pytest caches and reports.
+	@rm -rfv .coverage # pytest-cov
+	@rm -rfv htmlcov  # pytest-cov
+
+	@# Remove type checker/linter/formatter caches.
+	@rm -rfv .mypy_cache .ruff_cache
 
 check:
 	python manage.py check
@@ -25,7 +32,7 @@ check-deploy:
 	python manage.py check --deploy
 
 css:
-	sass static/scss/poncho.scss static/css/poncho.css
+	sass static/assets/scss/poncho.scss static/assets/css/styles.css
 
 shellplus:
 	python manage.py shell_plus --print-sql
@@ -59,20 +66,18 @@ runserver:
 build: install makemigrations migrate runserver
 
 format:
-	poetry run ruff check --select I --fix .
+	ruff check --select I --fix
+	ruff format .
 	djlint --reformat .
 
 lint:
-	poetry run ruff check --select I --fix .
+	ruff check .
+	djlint --lint .
 	djlint --check .
 
 test: check migrations-check
 	coverage run --source='.' manage.py test
 	coverage html
-
-security:
-	poetry run bandit -r .
-	poetry run safety check
 
 ci: format lint security test
 

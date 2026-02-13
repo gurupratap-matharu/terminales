@@ -1,46 +1,76 @@
-[tool.poetry]
+[project]
 name = "terminales"
 version = "0.1.0"
-description = "All terminal stations of Argentina"
-authors = ["Gurupratap Matharu <gurupratap.matharu@gmail.com>"]
+description = "Add your description here"
 readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-dotenv>=1.2.1",
+    "wagtail>=7.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-wagtail = "^7.0.2"
-python-dotenv = "^1.1.1"
-gunicorn = "^23.0.0"
+[tool.ruff]
+line-length=79
+exclude=["*migrations*", "static"]
 
+[tool.ruff.lint.isort]
+combine-as-imports=true
+force-single-line=false
+known-first-party=["blog"]
+known-third-party=["rest_framework"]
+lines-after-imports=2
+section-order=["future", "standard-library", "third-party", "first-party", "local-folder"]
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.12.7"
-djlint = "^1.36.4"
+[tool.ruff.lint.isort.sections]
+"django"=["django"]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.ty.rules]
+index-out-of-bounds = "ignore"
 
 [tool.djlint]
-blank_line_before_tag = "load,extends"
-blank_line_after_tag = "load,extends"
-close_void_tags = true
-custom_blocks = "toc,example"
-custom_html = "mjml"
-exclude = ".venv,venv,.tox,.eggs,.git"
-extend_exclude = ".custom"
-format_attribute_template_tags = true
-format_css = true
-format_js = true
-# ignore = "H006"
+blank_line_before_tag="load,extends"
+blank_line_after_tag="load,extends,endblock"
+close_void_tags=true
+custom_blocks="toc,example"
+custom_html="mjml"
+exclude=".venv,venv,.tox,.eggs,.git"
+extend_exclude=".custom"
+format_attribute_template_tags=true
+format_css=true
+format_js=true
 ignore_blocks="raw,example"
 indent=2
-max_attribute_length = 120
-max_line_length = 120
-profile = "django"
-use_gitignore = true
+max_attribute_length=120
+max_line_length=120
+profile="django"
+# preserve_blank_lines=true
+use_gitignore=true
 
 [tool.djlint.css]
-indent_size = 5
+indent_size=5
 
 [tool.djlint.js]
-indent_size = 5
+indent_size=5
+
+[tool.coverage.run]
+branch = true
+omit = [
+    # omit anything in a migrations directory anywhere
+    # "*/migrations/*",
+    # omit the tests themselfves
+    # "*/tests/*",
+    # omit these single files
+    # "main/asgi.py",
+    # "main/wsgi.py",
+    # "main/settings.py",
+    # "manage.py",
+    # "*/urls.py",
+    # "*/__init__.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+show_contexts = true
