@@ -2,10 +2,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from base.views import favicon
 from search import views as search_views
 
 
@@ -16,6 +18,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("servicio/", TemplateView.as_view(template_name="servicio.html")),
     path("libro/", TemplateView.as_view(template_name="libro.html")),
+    path("favicon.ico", favicon, name="favicon"),
 ]
 
 

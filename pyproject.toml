@@ -1,7 +1,7 @@
 [project]
 name = "terminales"
 version = "0.1.0"
-description = "Add your description here"
+description = "Terminales de micros en Argentina"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -17,13 +17,14 @@ exclude=["*migrations*", "static"]
 [tool.ruff.lint.isort]
 combine-as-imports=true
 force-single-line=false
-known-first-party=["blog"]
+known-first-party=["blog", "base", "users", "search", "home"]
 known-third-party=["rest_framework"]
 lines-after-imports=2
-section-order=["future", "standard-library", "third-party", "first-party", "local-folder"]
+section-order=["future", "standard-library", "django", "wagtail", "third-party", "first-party", "local-folder"]
 
 [tool.ruff.lint.isort.sections]
 "django"=["django"]
+"wagtail"=["wagtail"]
 
 [tool.ty.rules]
 index-out-of-bounds = "ignore"

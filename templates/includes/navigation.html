@@ -1,13 +1,11 @@
-{% load static %}
+{% load static i18n %}
 
 <header>
   <nav class="navbar navbar-expand-lg py-0 border-bottom-amarillo">
     <div class="container">
       <a class="navbar-brand ps-0" href="/" id="navbar-brand" aria-label="Terminales Importantes de la Republica Argentina">
-        <img src="{% static 'assets/img/logo-terminales-azul.svg' %}"
-             alt="Escudo Nacional de La Republica Argentina"
-             height="50"
-             width="200" />
+        <img src="{% static 'assets/img/logo.svg' %}" alt="Terminales Argentinas" height="50" width="50" />
+        <h1>{% translate "Terminales" %}</h1>
       </a>
     </div>
   </nav>
