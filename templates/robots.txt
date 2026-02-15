@@ -1,0 +1,13 @@
+User-Agent: *
+User-agent: AdsBot-Google
+Disallow: /accounts/
+Disallow: /account/
+Disallow: /users/
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /cdn-cgi/
+Disallow: /dj-admin/
+Disallow: /media/
+
+# Sitemap files
+Sitemap: {{ wagtail_site.root_url }}/sitemap.xml

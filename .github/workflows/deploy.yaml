@@ -44,7 +44,7 @@ jobs:
             /home/veer/code/terminales/.venv/bin/python manage.py migrate
 
             echo "Veer: compiling translations..."
-            /home/veer/code/terminales/.venv/bin/django-admin compilemessages
+            /home/veer/code/terminales/.venv/bin/django-admin compilemessages --ignore=.venv
 
             echo "Veer: reloading daemon..."
             sudo systemctl daemon-reload

@@ -1,7 +1,12 @@
 from django.conf import settings
-from django.http import FileResponse, HttpRequest
+from django.http import FileResponse, HttpRequest, HttpResponse
+from django.template.response import TemplateResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
+
+
+def robots(request: HttpRequest) -> HttpResponse:
+    return TemplateResponse(request, "robots.txt", content_type="text/plain")
 
 
 @require_GET

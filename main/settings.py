@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sitemaps",
     "django.contrib.staticfiles",
 ]
 
@@ -73,6 +74,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "main.context_processors.branding",
             ],
         },
     },
@@ -162,8 +164,10 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 
 # Wagtail settings
-
-WAGTAIL_SITE_NAME = "Terminales"
+SITE_ROOT = os.getenv("SITE_ROOT", "http://localhost:8000").removesuffix("/")
+SITE_NAME = os.getenv("SITE_NAME", "Terminales Argentinas")
+SITE_LOGO_URL = os.getenv("SITE_LOGO_URL")
+WAGTAIL_SITE_NAME = "Terminales Argentinas"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -203,10 +207,6 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "simple": {
-            "format": "{levelname} {message}",
-            "style": "{",
-        },
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s:%(lineno)d %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S",
@@ -216,7 +216,7 @@ LOGGING = {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "simple",
+            "formatter": "verbose",
         },
         "file": {
             "level": "WARNING",

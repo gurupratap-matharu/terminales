@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Styleguide
+{% endblock title %}
+
+{% block content %}
+  <article class="container">
+    <h1>Styleguide</h1>
+    <h1>h1. Bootstrap heading</h1>
+    <h2>h2. Bootstrap heading</h2>
+    <h3>h3. Bootstrap heading</h3>
+    <h4>h4. Bootstrap heading</h4>
+    <h5>h5. Bootstrap heading</h5>
+    <h6>h6. Bootstrap heading</h6>
+    <h3>
+      Fancy display heading
+      <small class="text-body-secondary">With faded secondary text</small>
+    </h3>
+    <h1 class="display-1">Display 1</h1>
+    <h1 class="display-2">Display 2</h1>
+    <h1 class="display-3">Display 3</h1>
+    <h1 class="display-4">Display 4</h1>
+    <h1 class="display-5">Display 5</h1>
+    <h1 class="display-6">Display 6</h1>
+    <p class="lead">This is a lead paragraph. It stands out from regular paragraphs.</p>
+    <p>
+      You can use the mark tag to <mark>highlight</mark> text.
+    </p>
+    <p>
+      <del>This line of text is meant to be treated as deleted text.</del>
+    </p>
+    <p>
+      <s>This line of text is meant to be treated as no longer accurate.</s>
+    </p>
+    <p>
+      <ins>This line of text is meant to be treated as an addition to the document.</ins>
+    </p>
+    <p>
+      <u>This line of text will render as underlined.</u>
+    </p>
+    <p>
+      <small>This line of text is meant to be treated as fine print.</small>
+    </p>
+    <p>
+      <strong>This line rendered as bold text.</strong>
+    </p>
+    <p>
+      <em>This line rendered as italicized text.</em>
+    </p>
+    <p>
+      <abbr title="attribute">attr</abbr>
+    </p>
+    <p>
+      <abbr title="HyperText Markup Language" class="initialism">HTML</abbr>
+    </p>
+    <blockquote class="blockquote">
+      <p>A well-known quote, contained in a blockquote element.</p>
+    </blockquote>
+    <ul class="list-inline">
+      <li class="list-inline-item">This is a list item.</li>
+      <li class="list-inline-item">And another one.</li>
+      <li class="list-inline-item">But they’re displayed inline.</li>
+    </ul>
+    <h2>Tables</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>John</td>
+          <td>Doe</td>
+          <td>@social</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h2>Figures</h2>
+    <figure class="figure">
+      <img class="figure-img img-fluid rounded"
+           width="400"
+           height="800"
+           src="{% static 'assets/img/argentina-mendoza-tunnel.avif' %}"
+           alt="Tunnel to Potrerillos in Mendoza Argentina" />
+      <figcaption class="figure-caption">Tunnel near potrerillos in Mendoza Argentina</figcaption>
+    </figure>
+  </article>
+{% endblock content %}
