@@ -34,6 +34,9 @@ jobs:
             echo "Veer: running git pull..."
             git pull origin master
 
+            echo "Veer: running uv sync..."
+            /home/veer/.local/bin/uv sync
+
             echo "Veer: collecting static..."
             /home/veer/code/terminales/.venv/bin/python manage.py collectstatic --noinput
 
